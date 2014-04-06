@@ -118,6 +118,44 @@
  *          Response: <array>
  *          Example response: Array ( [difficulty] => 1588.77 [network_hashrate] => 72599438905 [current_block] => 171002 [doge_usd] => 0.0004620649 [doge_btc] => 1.01E-6 [5min_btc_change] => 0 [5min_usd_change] => 0 [api_version] => 2 )
  *
+ *      $DogeAPI->create_user(user_id);
+ *          Description: Creates a new user identified by an alphanumeric, case-insensitive {USER_ID} and returns their payment address. Each user has only one payment address.
+ *          Require Args: user_id
+ *          Optional Args: none
+ *          Response: <dogecoin_address>
+ *          Example response: DSHm1KireZW22EaMTXYB2dXKvo2BVf1iSk
+ *          Example response: failed (if someting went wrong)
+ *
+ *      $DogeAPI->get_user_address(user_id);
+ *          Description:Returns the balance of the user with a given {USER_ID}.
+ *          Require Args: user_id
+ *          Optional Args: none
+ *          Response: <dogecoin_address>
+ *          Example response: DSHm1KireZW22EaMTXYB2dXKvo2BVf1iSk
+ *
+ *      $DogeAPI->withdraw_from_user(user_id, pin, amount, payment_address);
+ *          Description: Withdraws {AMOUNT_DOGE} from {USER_ID} to {PAYMENT_ADDRESS}. Requires your {PIN}
+ *          Require Args: user_id, pin, amount, payment_address
+ *          Optional Args: none
+ *          Response: <string>
+ *          Example response: success
+ *          Example response: failed
+ *
+ *      $DogeAPI->move_to_user(to_user_id, from_user_id, amount);
+ *          Description: Moves {AMOUNT_DOGE} to user with ID {TO_USER_ID} from user with ID {FROM_USER_ID}. There is no network fee for this transaction, just the DogeAPI fee.
+ *          Require Args: to_user_id, from_user_id, amount
+ *          Optional Args: none
+ *          Response: <string>
+ *          Example response: success
+ *          Example response: failed
+ *
+ *      $DogeAPI->get_users();
+ *          Description: Returns a list of users asssociated with your account with their balances.
+ *          Require Args: tnone
+ *          Optional Args: none
+ *          Response: <array>
+ *          Example response: Array ( [0] => Array ( [user_id] => TestDevUser [payment_address] => DDEBH2J1dW6yUSboKjtu7dfcAsLbGaX3UQ [user_balance] => 0.00000000 ) [1] => Array ( [user_id] => TestDevUser2 [payment_address] => D9YT1BA1g8EwzubJfkxu8uPQ4ppcamPZzc [user_balance] => 0.00000000 ) )
+ *
  */
 
 class DogeAPI {
@@ -196,7 +234,7 @@ class DogeAPI {
     public function withdraw($amount, $pin, $payment_address) {
 
         $response = $this->server_request("withdraw&amount_doge=".$amount."&pin=".$pin."&payment_address=".$payment_address."");
-        
+
         if(empty($response)) {
             return "failed";
         } else {
@@ -279,28 +317,60 @@ class DogeAPI {
     }
 
     /* API V2 */
-    /* This section is under development! Finish Update: 06.04.2014 21:00! */
-    public function create_user() {
+    public function create_user($user_id) {
+
+        $response = $this->server_request("create_user&user_id=".$user_id);
+
+        if(empty($response)) {
+            return "failed";
+        } else {
+            return $response['data']['address'];
+        }
 
     }
 
-    public function get_user_address() {
+    public function get_user_address($user_id) {
+
+        $response = $this->server_request("get_user_address&user_id=".$user_id);
+        return $response['data']['address'];
 
     }
 
-    public function get_user_balance() {
+    public function get_user_balance($user_id) {
+
+        $response = $this->server_request("get_user_balance&user_id=".$user_id);
+        return $response['data']['balance'];
 
     }
 
-    public function withdraw_from_user() {
+    public function withdraw_from_user($user_id, $pin, $amount, $payment_address) {
+
+        $response = $this->server_request("withdraw_from_user&user_id=".$user_id."&pin=".$pin."&amount_doge=".$amount."&payment_address=".$payment_address);
+
+        if(empty($response)) {
+            return "failed";
+        } else {
+            return "success";
+        }
 
     }
 
-    public function move_to_user() {
+    public function move_to_user($to_user_id, $from_user_id, $amount) {
+
+        $response = $this->server_request("move_to_user&to_user_id=".$to_user_id."&from_user_id=".$from_user_id."&amount_doge=".$amount);
+
+        if(empty($response)) {
+            return "failed";
+        } else {
+            return "success";
+        }
 
     }
 
     public function get_users() {
+
+        $response = $this->server_request("get_users");
+        return $response['data']['users'];
 
     }
 
