@@ -1,10 +1,9 @@
 DogeAPI
 =======
 
-/*
- * @ Class: DogeAPI
- * @ Description: A PHP Class for dogeapi.com
- * @ Last change: 06.04.2014
+@ Class: DogeAPI
+@ Description: A PHP Class for dogeapi.com
+@ Last change: 06.04.2014
  *
  * @ Version: 1.0.0
  * @ Copyright: 2014 www.mr-anderson.org
