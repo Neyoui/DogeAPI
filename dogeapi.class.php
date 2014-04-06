@@ -44,6 +44,15 @@
  *          Example response: 0
  *          Example response: 7.64974147
  *
+ *      $DogeAPI->withdraw(amount, pin, payment_address);
+ *          Description: Withdraws {AMOUNT_DOGE} doge to a {PAYMENT_ADDRESS} you specify. Requires your {PIN}.
+ *          Attention!: For now this must be more than 5 doge, and you must have enough extra in your wallet to pay all network fees (another 1-3 doge). DogeAPI takes a 0.5% fee when withdrawing.
+ *          Require Args: amount, pin, payment_address
+ *          Optional Args: none
+ *          Response: <string>
+ *          Example response: success
+ *          Example response: failed
+ *
  *      $DogeAPI->get_new_address("Label");
  *          Description: Returns a new payment address for your account. You can pass an optional alphanumeric {ADDRESS_LABEL} as a label for the address.
  *          Require Args: none
@@ -181,6 +190,19 @@ class DogeAPI {
 
         $response = $this->server_request("get_balance");
         return $response['data']['balance'];
+
+    }
+
+    public function withdraw($amount, $pin, $payment_address) {
+
+        $response = $this->server_request("withdraw&amount_doge=".$amount."&pin=".$pin."&payment_address=".$payment_address."");
+        $this->debug($response);
+
+        if(empty($response)) {
+            return "failed";
+        } else {
+            return "success";
+        }
 
     }
 
