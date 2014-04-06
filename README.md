@@ -19,7 +19,7 @@ Info: If you need some help, just contact me @ support@mr-anderson.org<br />
 Info: Please note that you have to whitelist your server ip at http://dogeapi.com/settings/<br />
 
 
-Updates: You can fined updates under the following website: http://dogecoin.mr-anderson.org/<br />
+Updates: You can fined updates under the following website: https://github.com/Neyoui/DogeAPI/<br />
 Feedback & Bugreport: If you want to give me feedback or you find a Bug, than just contact me via mail.<br />
 
 
