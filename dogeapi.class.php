@@ -58,6 +58,14 @@
  *          Response: <array>
  *          Example response: Array ( [0] => DN9NVwU7Z8bBon9n9k94haTwf546HB25ut [1] => D9K1c9B6D7LQG75hNwEEp6VEZR3XD3SqoS [2] => DE63eKsUjv4YqbjCp9XQj7FGDQ45cHvTgz )
  *
+ *      $DogeAPI->get_address_by_label(label);
+ *          Description: Returns the payment address for the given {ADDRESS_LABEL}. If there are more addresses with the same label, all of them would be returned.
+ *          Require Args: label
+ *          Optional Args: none
+ *          Response: <array>
+ *          Example response: Array ( [0] => DE63eKsUjv4YqbjCp9XQj7FGDQ45cHvTgz )
+ *          Example response: Array ( [0] => DE63eKsUjv4YqbjCp9XQj7FGDQ45cHvTgz [1] => DJKF7PQXB1JzMvCpCtDvvaMoipVbFBEDig )
+ *
  *      $DogeAPI->get_difficulty();
  *          Description: Returns the current difficulty.
  *          Require Args: none
@@ -92,14 +100,6 @@
  *          Optional Args: none
  *          Response: <array>
  *          Example response: Array ( [difficulty] => 1588.77 [network_hashrate] => 72599438905 [current_block] => 171002 [doge_usd] => 0.0004620649 [doge_btc] => 1.01E-6 [5min_btc_change] => 0 [5min_usd_change] => 0 [api_version] => 2 )
- *
- *      $DogeAPI->get_address_by_label(label);
- *          Description: Returns the payment address for the given {ADDRESS_LABEL}. If there are more addresses with the same label, all of them would be returned.
- *          Require Args: label
- *          Optional Args: none
- *          Response: <array>
- *          Example response: Array ( [0] => DE63eKsUjv4YqbjCp9XQj7FGDQ45cHvTgz )
- *          Example response: Array ( [0] => DE63eKsUjv4YqbjCp9XQj7FGDQ45cHvTgz [1] => DJKF7PQXB1JzMvCpCtDvvaMoipVbFBEDig )
  *
  */
 
