@@ -7,7 +7,7 @@
  *
  * @ Version: 1.0.0
  * @ Copyright: 2014 www.mr-anderson.org
- * @ License: http://creativecommons.org/licenses/by-sa/3.0/
+ * @ License: http://creativecommons.org/licenses/by-sa/4.0/
  * @ Author: Markus Tressel <support@mr-anderson.org>
  *
  * @ Requirements: PHP 5.3 and greater, dogeapi.com V2
@@ -92,6 +92,14 @@
  *          Optional Args: none
  *          Response: <array>
  *          Example response: Array ( [difficulty] => 1588.77 [network_hashrate] => 72599438905 [current_block] => 171002 [doge_usd] => 0.0004620649 [doge_btc] => 1.01E-6 [5min_btc_change] => 0 [5min_usd_change] => 0 [api_version] => 2 )
+ *
+ *      $DogeAPI->get_address_by_label(label);
+ *          Description: Returns the payment address for the given {ADDRESS_LABEL}. If there are more addresses with the same label, all of them would be returned.
+ *          Require Args: label
+ *          Optional Args: none
+ *          Response: <array>
+ *          Example response: Array ( [0] => DE63eKsUjv4YqbjCp9XQj7FGDQ45cHvTgz )
+ *          Example response: Array ( [0] => DE63eKsUjv4YqbjCp9XQj7FGDQ45cHvTgz [1] => DJKF7PQXB1JzMvCpCtDvvaMoipVbFBEDig )
  *
  */
 
@@ -188,6 +196,14 @@ class DogeAPI {
         return $response['data']['addresses'];
 
     }
+
+    public function get_address_by_label($label) {
+
+        $response = $this->server_request("get_address_by_label&address_label=".$label);
+        return $response['data']['addresses'];
+
+    }
+
 
 
     /* requests which doesn't need an api key */
