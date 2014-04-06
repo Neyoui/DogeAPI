@@ -279,6 +279,36 @@ class DogeAPI {
 
     }
 
+    /* API V2 */
+    /* This section is under development! It will be finished soon. (Not longer than 08.02.2014!) */
+    public function create_user() {
+
+    }
+
+    public function get_user_address() {
+
+    }
+
+    public function get_user_balance() {
+
+    }
+
+    public function withdraw_from_user() {
+
+    }
+
+    public function move_to_user() {
+
+    }
+
+    public function get_users() {
+
+    }
+
+    public function get_transactions() {
+
+    }
+
 }
 
 ?>
