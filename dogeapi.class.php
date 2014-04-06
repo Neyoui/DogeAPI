@@ -58,6 +58,14 @@
  *          Response: <array>
  *          Example response: Array ( [0] => DN9NVwU7Z8bBon9n9k94haTwf546HB25ut [1] => D9K1c9B6D7LQG75hNwEEp6VEZR3XD3SqoS [2] => DE63eKsUjv4YqbjCp9XQj7FGDQ45cHvTgz )
  *
+ *      $DogeAPI->get_address_received(address);
+ *          Description: Returns the current amount received to all addresses with {PAYMENT_ADDRESS}.
+ *          Require Args: address
+ *          Optional Args: none
+ *          Response: <numeric>
+ *          Example response: 0
+ *          Example response: 7.64974147
+ *
  *      $DogeAPI->get_address_by_label(label);
  *          Description: Returns the payment address for the given {ADDRESS_LABEL}. If there are more addresses with the same label, all of them would be returned.
  *          Require Args: label
@@ -197,14 +205,19 @@ class DogeAPI {
 
     }
 
+    public function get_address_received($address) {
+
+        $response = $this->server_request("get_address_received&payment_address=".$address);
+        return $response['data']['received'];
+
+    }
+
     public function get_address_by_label($label) {
 
         $response = $this->server_request("get_address_by_label&address_label=".$label);
         return $response['data']['addresses'];
 
     }
-
-
 
     /* requests which doesn't need an api key */
     public function get_difficulty() {
