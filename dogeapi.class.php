@@ -196,8 +196,7 @@ class DogeAPI {
     public function withdraw($amount, $pin, $payment_address) {
 
         $response = $this->server_request("withdraw&amount_doge=".$amount."&pin=".$pin."&payment_address=".$payment_address."");
-        $this->debug($response);
-
+        
         if(empty($response)) {
             return "failed";
         } else {
