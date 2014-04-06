@@ -67,9 +67,9 @@
  *          Response: <array>
  *          Example response: Array ( [0] => DN9NVwU7Z8bBon9n9k94haTwf546HB25ut [1] => D9K1c9B6D7LQG75hNwEEp6VEZR3XD3SqoS [2] => DE63eKsUjv4YqbjCp9XQj7FGDQ45cHvTgz )
  *
- *      $DogeAPI->get_address_received(address);
- *          Description: Returns the current amount received to all addresses with {PAYMENT_ADDRESS}.
- *          Require Args: address
+ *      $DogeAPI->get_address_received(address, address_label);
+ *          Description: Returns the current amount received to all addresses with {PAYMENT_ADDRESS} or {PAYMENT_ADDRESS}.
+ *          Require Args: address OR address_label
  *          Optional Args: none
  *          Response: <numeric>
  *          Example response: 0
@@ -151,10 +151,16 @@
  *
  *      $DogeAPI->get_users();
  *          Description: Returns a list of users asssociated with your account with their balances.
- *          Require Args: tnone
+ *          Require Args: none
  *          Optional Args: none
  *          Response: <array>
  *          Example response: Array ( [0] => Array ( [user_id] => TestDevUser [payment_address] => DDEBH2J1dW6yUSboKjtu7dfcAsLbGaX3UQ [user_balance] => 0.00000000 ) [1] => Array ( [user_id] => TestDevUser2 [payment_address] => D9YT1BA1g8EwzubJfkxu8uPQ4ppcamPZzc [user_balance] => 0.00000000 ) )
+ *
+ *      $DogeAPI->get_transactions(num, type, user_id, payment_address, address_label);
+ *          Description: Returns a list of the {NUMBER} most recent transactions matching the options. {USER_ID}, {PAYMENT_ADDRESS}, {LABEL}, and {TYPE} are all optional. The types are receive, send, move, and fee.
+ *          Require Args: num
+ *          Optional Args: type, user_id, payment_address, address_label
+ *          Response: <array>
  *
  */
 
@@ -264,9 +270,23 @@ class DogeAPI {
 
     }
 
-    public function get_address_received($address) {
+    public function get_address_received($address = NULL, $label = NULL) {
 
-        $response = $this->server_request("get_address_received&payment_address=".$address);
+        if($address == NULL && $label == NULL) {
+            return false;
+        }
+
+        $request = "get_address_received";
+
+        if($address != NULL) {
+            $request .= "&payment_address=".$address;
+        }
+
+        if($label != NULL) {
+            $request .= "&address_label=".$label;
+        }
+
+        $response = $this->server_request($request);
         return $response['data']['received'];
 
     }
@@ -374,7 +394,29 @@ class DogeAPI {
 
     }
 
-    public function get_transactions() {
+    public function get_transactions($num, $type = NULL, $user_id = NULL, $payment_address = NULL, $label = NULL) {
+
+        $request = "get_transactions&num=".$num."";
+
+        if($type != NULL) {
+            $request .= "&type=".$type;
+        }
+
+        if($user_id != NULL) {
+            $request .= "&user_id=".$user_id;
+        }
+
+        if($payment_address != NULL) {
+            $request .= "&payment_address=".$payment_address;
+        }
+
+        if($label != NULL) {
+            $request .= "&address_label=".$label;
+        }
+
+        $response = $this->server_request($request);
+
+        return $response['data'];
 
     }
 
