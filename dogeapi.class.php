@@ -7,6 +7,7 @@
  *
  * @ Version: 1.0.0
  * @ Copyright: 2014 www.mr-anderson.org
+ * @ License: http://creativecommons.org/licenses/by-sa/3.0/
  * @ Author: Markus Tressel <support@mr-anderson.org>
  *
  * @ Requirements: PHP 5.3 and greater, dogeapi.com V2
