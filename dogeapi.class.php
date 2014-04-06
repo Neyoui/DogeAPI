@@ -279,7 +279,7 @@ class DogeAPI {
     }
 
     /* API V2 */
-    /* This section is under development! It will be finished soon. (Not longer than 08.02.2014!) */
+    /* This section is under development! Finish Update: 06.04.2014 21:00! */
     public function create_user() {
 
     }
