@@ -204,9 +204,9 @@ class DogeAPI {
 
         if(!empty($response)) {
             return json_decode($response, true);
-        } else {
-            return $response;
         }
+
+        return $response;
 
     }
 
@@ -217,9 +217,9 @@ class DogeAPI {
 
         if(empty($response)) {
             return false;
-        } else {
-            return true;
         }
+
+        return true;
 
     }
 
@@ -243,9 +243,9 @@ class DogeAPI {
 
         if(empty($response)) {
             return "failed";
-        } else {
-            return "success";
         }
+
+        return "success";
 
     }
 
@@ -258,7 +258,6 @@ class DogeAPI {
         }
 
         $response = $this->server_request($request);
-
         return $response['data']['address'];
 
     }
@@ -343,9 +342,9 @@ class DogeAPI {
 
         if(empty($response)) {
             return "failed";
-        } else {
-            return $response['data']['address'];
         }
+
+        return $response['data']['address'];
 
     }
 
@@ -369,9 +368,9 @@ class DogeAPI {
 
         if(empty($response)) {
             return "failed";
-        } else {
-            return "success";
         }
+
+        return "success";
 
     }
 
@@ -381,9 +380,9 @@ class DogeAPI {
 
         if(empty($response)) {
             return "failed";
-        } else {
-            return "success";
         }
+
+        return "success";
 
     }
 
@@ -415,7 +414,6 @@ class DogeAPI {
         }
 
         $response = $this->server_request($request);
-
         return $response['data'];
 
     }
