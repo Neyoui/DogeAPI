@@ -396,7 +396,7 @@ class DogeAPI {
 
     public function get_transactions($num, $type = NULL, $user_id = NULL, $payment_address = NULL, $label = NULL) {
 
-        $request = "get_transactions&num=".$num."";
+        $request = "get_transactions&num=".$num;
 
         if($type != NULL) {
             $request .= "&type=".$type;
