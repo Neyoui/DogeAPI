@@ -3,9 +3,9 @@
 /*
  * @ Class: DogeAPI
  * @ Description: A PHP Class for dogeapi.com
- * @ Last change: 06.04.2014
+ * @ Last change: 07.04.2014
  *
- * @ Version: 1.0.0
+ * @ Version: 1.0.1
  * @ Copyright: 2014 www.mr-anderson.org
  * @ License: http://creativecommons.org/licenses/by-sa/4.0/
  * @ Author: Markus Tressel <support@mr-anderson.org>
@@ -194,19 +194,21 @@ class DogeAPI {
     /* server_request */
     private function server_request($request, $need_key = true) {
 
+        $request = $this->SETTINGS_API_HOST.$this->SETTINGS_API_PATH;
+
         if($need_key == true) {
-            $request = $this->SETTINGS_API_HOST.$this->SETTINGS_API_PATH."?api_key=".$this->APIKEY."&a=".$request;
+            $request .= "?api_key=".$this->APIKEY."&a=".$request;
         } else {
-            $request = $this->SETTINGS_API_HOST.$this->SETTINGS_API_PATH."?a=".$request;
+            $request .= "?a=".$request;
         }
 
         $response = file_get_contents($request);
 
         if(!empty($response)) {
             return json_decode($response, true);
-        } else {
-            return $response;
         }
+
+        return $response;
 
     }
 
@@ -217,9 +219,9 @@ class DogeAPI {
 
         if(empty($response)) {
             return false;
-        } else {
-            return true;
         }
+
+        return true;
 
     }
 
@@ -243,9 +245,9 @@ class DogeAPI {
 
         if(empty($response)) {
             return "failed";
-        } else {
-            return "success";
         }
+
+        return "success";
 
     }
 
@@ -343,9 +345,9 @@ class DogeAPI {
 
         if(empty($response)) {
             return "failed";
-        } else {
-            return $response['data']['address'];
         }
+
+        return $response['data']['address'];
 
     }
 
@@ -369,9 +371,9 @@ class DogeAPI {
 
         if(empty($response)) {
             return "failed";
-        } else {
-            return "success";
         }
+
+        return "success";
 
     }
 
@@ -381,9 +383,9 @@ class DogeAPI {
 
         if(empty($response)) {
             return "failed";
-        } else {
-            return "success";
         }
+
+        return "success";
 
     }
 
