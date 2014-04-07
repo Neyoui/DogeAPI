@@ -3,9 +3,7 @@ DogeAPI
 
 Class: DogeAPI<br />
 Description: A PHP Class for dogeapi.com<br />
-Last change: 06.04.2014<br />
 
-Version: 1.0.0<br />
 Copyright: 2014 www.mr-anderson.org<br />
 License: http://creativecommons.org/licenses/by-sa/4.0/<br />
 Author: Markus Tressel <support@mr-anderson.org> <br />
