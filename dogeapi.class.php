@@ -33,6 +33,8 @@
  *
  *      1) Create a new DogeAPI Object.
  *          $DogeAPI = new DogeAPI("your_api_key");
+ *          OR
+ *          $DogeAPI = new DogeAPI(); <- Without an API KEY, you can only access public functions! E.g. get_difficulty
  *
  * @ Useable functions:
  *
@@ -171,38 +173,47 @@ class DogeAPI {
     protected $SETTINGS_API_PATH    = "wow/v2/";
 
     /* vars */
-    private $APIKEY;
+    private $APIKEY                 = NULL;
+    private $APIKEY_VALID           = false;
 
 
     /* construcor */
     public function __construct($APIKEY = NULL) {
 
         // SETUP APIKEY
-        if($APIKEY == NULL) {
-            echo 'You need to setup an API KEY!<br /><pre>$DogeAPI = new DogeAPI("your_api_key");</pre>';
-            exit();
-        } else { $this->APIKEY = $APIKEY; }
+        if($APIKEY != NULL) {
 
-        // VERIFY APIKEY
-        if($this->verify_apikey() != true) {
-            echo "Your API KEY is invalid!";
-            exit();
+            $this->APIKEY = $APIKEY;
+
+            // VERIFY APIKEY
+            if($this->verify_apikey() != true) {
+                echo "Your API KEY is invalid!";
+                exit();
+            }
+
+            $this->APIKEY_VALID = true;
+
         }
 
     }
 
     /* server_request */
-    private function server_request($request, $need_key = true) {
+    private function server_request($request, $need_key = true, $verify_apikey = false) {
 
-        $request = $this->SETTINGS_API_HOST.$this->SETTINGS_API_PATH;
-
-        if($need_key == true) {
-            $request .= "?api_key=".$this->APIKEY."&a=".$request;
-        } else {
-            $request .= "?a=".$request;
+        if($need_key == true && $this->APIKEY_VALID == false && $verify_apikey == false) {
+            echo "You need an valid API KEY to use this function!";
+            exit();
         }
 
-        $response = file_get_contents($request);
+        $request_build = $this->SETTINGS_API_HOST.$this->SETTINGS_API_PATH;
+
+        if($need_key == true) {
+            $request_build .= "?api_key=".$this->APIKEY."&a=".$request;
+        } else {
+            $request_build .= "?a=".$request;
+        }
+
+        $response = file_get_contents($request_build);
 
         if(!empty($response)) {
             return json_decode($response, true);
@@ -215,7 +226,7 @@ class DogeAPI {
     /* verify_apikey */
     private function verify_apikey() {
 
-        $response = $this->server_request("get_balance");
+        $response = $this->server_request("get_balance", true, true);
 
         if(empty($response)) {
             return false;
