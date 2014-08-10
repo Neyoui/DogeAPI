@@ -2,8 +2,8 @@ DogeAPI
 =======
 
 <h5>ATTENTION!</h5>
-THE DOGEAPI SERVICE IS SHUTTING DOWN!<br />
-MORE INFORMATION ON THE OFFIFCAL DOGEAPI WEBSITE.<br />
+<strong>THE DOGEAPI SERVICE IS SHUTTING DOWN!</strong><br />
+<strong>MORE INFORMATION ON THE OFFIFCAL DOGEAPI WEBSITE.</strong><br />
 https://dogeapi.com/<br />
 
 If someone has intrest for a new PHP API for Block.io, feel free to contact me via mail.<br />
